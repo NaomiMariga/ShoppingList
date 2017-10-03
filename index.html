@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Material Design Bootstrap</title>
+    <title>Shopping List</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="">
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
@@ -19,13 +19,32 @@
 <body>
 
     <!-- Start your project here-->
-    <div style="height: 100vh">
-        <div class="flex-center flex-column">
-            <h1 class="animated fadeIn mb-2">Material Design for Bootstrap</h1>
+    <div class="container-100">
+        <div class="jumbotron">
+            <h1 class="text-center text-lime">WELCOME TO SHOPPING LIST</h1>
+            <h4 class="text-lime text-center">Shopping List gives you an amazing experience of comfortably managing the list of things you wish to purchase </h4>
+        </div>
+        <div class="flex-center flex-column" >
+            <div class="jumbotron">
+                <form class="md-form">
+                    <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#signupForm">Sign Up</button>
+                    <button type="button"class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#loginForm">Login</button>
+                    <div class="collapse" id="loginForm">
+                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="password" class="form-control" placeholder="Password" required >
+                        <input type="submit" class="btn btn-sm btn-lime" value="Login">
 
-            <h5 class="animated fadeIn mb-1">Thank you for using our product. We're glad you're with us.</h5>
+                    </div>
+                    <div class="collapse" id="signupForm">
+                        <input type="email" class="form-control" placeholder="Email" required >
+                        <input type="text" class="form-control" placeholder="Username" required>
+                        <input type="password" class="form-control" placeholder="Password" required>
+                        <input type="submit" class="btn btn-sm btn-lime" value="SignUp">
 
-            <p class="animated fadeIn text-muted">MDB Team</p>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
     <!-- /Start your project here-->

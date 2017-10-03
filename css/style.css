@@ -1,1 +1,31 @@
 /* YOUR CUSTOM STYLES */
+body{
+    min-height: 100%;
+}
+
+.container-100{
+    height: 100vh;
+}
+
+.text-lime{
+    color: #32cd32;
+}
+
+.btn-lime{
+    background-color: #32cd32;
+}
+
+.btn-lime {
+  background: #32cd32; }
+  .btn-lime:hover, .btn-lime:focus {
+    background-color: #2db82d !important; }
+  .btn-lime.active {
+    background-color: #84e184 !important; }
+
+.btn-outline-lime{
+    background-color: #32cd32;
+}
+
+.jumbotron{
+border-bottom-color: #32cd32;
+}
