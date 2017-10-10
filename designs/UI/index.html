@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Shopping List</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Start your project here-->
+<div class="container-100" id="loginPage">
+    <div class="flex-center flex-column">
+        <div class="" style="margin-bottom: 30px;">
+            <h2 class="text-center text-lime mb-1">WELCOME TO SHOPPING LIST</h2>
+            <h5 class="text-lime text-center mb-1">Shopping List gives you an amazing experience of comfortably
+                managing the list of things you wish to purchase </h5>
+        </div>
+        <div class="jumbotron">
+            <form class="md-form">
+                <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#signupForm">
+                    Sign Up
+                </button>
+                <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#loginForm">
+                    Login
+                </button>
+                <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#pass_reset">
+                    Reset Password
+                </button>
+                <div class="collapse" id="loginForm">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email" required>
+                        <span class="form-text small text-muted">Enter your registered email here</span>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" placeholder="Password" required>
+                        <span class="form-text small text-muted">Enter your password here</span>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-lime float-right" onclick="login()">Login</button>
+
+                </div>
+                <div class="collapse" id="pass_reset">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email" required>
+                        <span class="form-text small text-muted">Enter your registered email here</span>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-lime float-right">Reset Password</button>
+
+                </div>
+                <div class="collapse" id="signupForm">
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email" required>
+                        <span class="form-text small text-muted">Enter your email address here</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username" required>
+                        <span class="form-text small text-muted">You will be identified by this name</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" required>
+                        <span class="form-text small text-muted">A new password for your account</span>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-lime float-right">SignUp</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /Start your project here-->
+
+<!-- Navbar here -->
+<div class="d-none table text-center" id="mainPage">
+    <div class="navbar navbar-toggleable-sm">
+        <a class="navbar-brand text-lime material material-shopping-cart" href="#">Shopping List</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#mynav"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="material material-menu text-lime"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active" href="#myLists" data-toggle="collapse" data-target="#mynav.show">
+                    <a class="nav-link text-lime" href="#">HOME</a>
+                </li>
+                <li class="nav-item" data-toggle="collapse" data-target="#mynav.show">
+                    <a class="nav-link text-lime" href="#myProfile">PROFILE</a>
+                </li>
+                <li class="nav-item" data-toggle="collapse" onclick="logout()" data-target="#mynav.show">
+                <a class="nav-link text-lime" href="#">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- main page -->
+    <div class="container-fluid row" id="myLists" style="margin-top: 40px;   ">
+        <!-- Shopping Lists -->
+        <div class="col-12 col-sm-4 col-md-3 list-group-flush">
+            <h5 class="list-group-item-heading">My Lists
+                <a href="#" data-toggle="modal" data-target="#new_list"
+                   title="New List" class="material material-shopping-cart-plus float-right text-lime"
+                   style="margin-right: 10px;"
+                ></a>
+            </h5>
+            <a href="#" class="list-group-item flex-column">
+                <div class="d-sm-flex w-100 justify-content-between">
+                    <h6 class="mb-1">Back to School</h6>
+                    <span class="small text-muted">2min ago</span>
+                </div>
+            </a>
+            <a href="#" class="list-group-item flex-column">
+                <div class="d-sm-flex w-100 justify-content-between">
+                    <h6 class="mb-1">Groceries</h6>
+                    <span class="small text-muted">2min ago</span>
+                </div>
+            </a>
+            <a href="#" class="list-group-item flex-column">
+                <div class="d-sm-flex w-100 justify-content-between">
+                    <h6 class="mb-1">Back to School</h6>
+                    <span class="small text-muted">2min ago</span>
+                </div>
+            </a>
+            <a href="#" class="list-group-item flex-column">
+                <div class="d-sm-flex w-100 justify-content-between">
+                    <h6 class="mb-1">Back to School</h6>
+                    <span class="small text-muted">2min ago</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Auto complete for units -->
+        <datalist id="units">
+            <option value="g"></option>
+            <option value="Kg"></option>
+            <option value="m"></option>
+            <option value="l"></option>
+            <option value="Piece"></option>
+        </datalist>
+        <!-- Actual List -->
+        <div class="col-12 col-sm-8 col-md-9">
+            <h5>
+                Back to school
+                <span class="float-right m-20 material "></span>
+                <a href="#" title="Delete" data-toggle="modal" data-target="#delete_list"
+                   class="material material-delete m-20 float-right text-danger"></a>
+                <a href="#" title="Rename" data-toggle="modal" data-target="#rename_list"
+                   class="material material-edit float-right text-lime m-20"></a>
+                <a href="#" title="Add Item" class="material material-plus-circle-o float-right text-lime m-20"></a>
+            </h5>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Cost</td>
+                    <td>Total</td>
+                    <td>Remove</td>
+                </tr>
+                </thead>
+                <tbody id="list_items">
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="Item"></td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm float-left quantity"
+                               placeholder="Quantity">
+                        <input type="text" class="form-control form-control-sm float-right units" list="units"
+                               placeholder="">
+                    </td>
+                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
+                    <td>0.00</td>
+                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="Item"></td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm float-left quantity"
+                               placeholder="Quantity">
+                        <input type="text" class="form-control form-control-sm float-right units" list="units"
+                               placeholder="">
+                    </td>
+                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
+                    <td>0.00</td>
+                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="Item"></td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm float-left quantity"
+                               placeholder="Quantity">
+                        <input type="text" class="form-control form-control-sm float-right units" list="units"
+                               placeholder="">
+                    </td>
+                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
+                    <td>0.00</td>
+                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="Item"></td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm float-left quantity"
+                               placeholder="Quantity">
+                        <input type="text" class="form-control form-control-sm float-right units" list="units"
+                               placeholder="">
+                    </td>
+                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
+                    <td>0.00</td>
+                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="form-control" placeholder="Item"></td>
+                    <td>
+                        <input type="text" class="form-control form-control-sm float-left quantity"
+                               placeholder="Quantity">
+                        <input type="text" class="form-control form-control-sm float-right units" list="units"
+                               placeholder="">
+                    </td>
+                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
+                    <td>0.00</td>
+                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Edit Modals -->
+        <div class="modal" id="new_list">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="text" placeholder="Name of your list...">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-lime">Add List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="rename_list">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Rename List</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="small">Change name for your list: </p>
+                        <input class="form-control" type="text" placeholder="Name of your list...">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-lime">Rename</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="delete_list">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete List Name?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit user profile -->
+    <div class="col-12 row justify-content-center d-none" id="myProfile">
+        <form class="col-12 col-sm-8 col-md-6 col-lg-5 md-form text-center">
+            <h5 class="text-center">Reset Password</h5>
+            <input type="password" class="form-control" title="" placeholder="Current Password">
+            <input type="password" class="form-control" title="" placeholder="New Password">
+            <input type="password" class="form-control" title="" placeholder="Confirm Password">
+            <button type="submit" class="btn btn-lime btn-sm">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/tether.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <!-- javascript actions -->
+    <script type="text/javascript" src="js/actions.js"></script>
+</div>
+</body>
+
+</html>

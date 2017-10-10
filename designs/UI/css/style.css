@@ -1,0 +1,125 @@
+/* YOUR CUSTOM STYLES */
+body{
+    min-height: 100%;
+}
+
+.container-100{
+    height: 100vh;
+
+}
+
+.text-lime, .text-lime:hover, .text-lime:active, .text-lime:focus{
+    color: #32cd32;
+}
+
+.btn-lime{
+    background-color: #32cd32;
+}
+
+
+  input[type=text]:focus:not([readonly]),
+  input[type=password]:focus:not([readonly]),
+  input[type=email]:focus:not([readonly]),
+  input[type=url]:focus:not([readonly]),
+  input[type=time]:focus:not([readonly]),
+  input[type=date]:focus:not([readonly]),
+  input[type=datetime-local]:focus:not([readonly]),
+  input[type=tel]:focus:not([readonly]),
+  input[type=number]:focus:not([readonly]),
+  input[type=search-md]:focus:not([readonly]),
+  input[type=search]:focus:not([readonly]),
+  textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #32cd32;
+    box-shadow: 0 1px 0 0 #32cd32; }
+
+.btn-lime {
+  background: #32cd32; }
+  .btn-lime:hover, .btn-lime:focus {
+    background-color: #2db82d !important; }
+  .btn-lime.active {
+    background-color: #32cd32 !important; }
+
+.btn-outline-lime{
+    background-color: #32cd32;
+}
+
+.navbar{
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.m-20{
+    margin-right: 20px;
+}
+
+#list_items tr td:nth-child(3){
+    width: 100px;
+}
+
+#list_items tr td:nth-child(2){
+    width: 200px;
+}
+
+.quantity{
+    width: 60% !important;
+}
+
+.units{
+    width: 38% !important;
+}
+
+@media (max-width: 768px) {
+    .quantity{
+        width: 100% !important;
+    }
+
+    .units{
+        display: none;
+    }
+    #list_items tr td:nth-child(2){
+        width: 100px;
+    }
+    #list_items tr td:nth-child(3){
+        width: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .quantity{
+        width: 100% !important;
+    }
+
+    .units{
+        display: none;
+    }
+    #list_items tr td:nth-child(2){
+        width: 80px;
+    }
+    #list_items tr td:nth-child(3){
+        width: 80px;
+    }
+}
+#list_items tr td:last-child{
+    padding-left: 20px;
+}
+
+#list_items tr td{
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: middle;
+}
+
+.active{
+    border-bottom: 1px solid #32cd32;
+}
+
+a{
+    color:#32cd32;
+}
+a:hover, a:active{
+    color:#32cd32;
+}
+
+.jumbotron{
+border-bottom-color: #32cd32;
+}
