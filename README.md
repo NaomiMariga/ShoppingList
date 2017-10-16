@@ -14,4 +14,3 @@ Dummy login enabled by clicking the login button for testing
 - Delete Shopping lists
 - Automatic cost calculation
 - DOM implementation for fast page operation
-
