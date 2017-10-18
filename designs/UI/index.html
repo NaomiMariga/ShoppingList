@@ -27,7 +27,7 @@
                 managing the list of things you wish to purchase </h5>
         </div>
         <div class="jumbotron">
-            <form class="md-form">
+            <div class="md-form">
                 <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#signupForm">
                     Sign Up
                 </button>
@@ -37,44 +37,49 @@
                 <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#pass_reset">
                     Reset Password
                 </button>
-                <div class="collapse" id="loginForm">
+                <form action="javascript:login()" class="collapse" id="loginForm">
+                    <div id="login_alerts"></div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" id="login_email" placeholder="Email" required>
                         <span class="form-text small text-muted">Enter your registered email here</span>
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required>
+                        <input type="password" class="form-control" id="login_password" placeholder="Password" required>
                         <span class="form-text small text-muted">Enter your password here</span>
                     </div>
-                    <button type="button" class="btn btn-sm btn-lime float-right" onclick="login()">Login</button>
+                    <button type="submit" class="btn btn-sm btn-lime float-right">Login</button>
 
-                </div>
-                <div class="collapse" id="pass_reset">
+                </form>
+                <form class="collapse" id="pass_reset" action="javascript:resetPassword()">
+                    <div id="reset_password_alerts"></div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" id="reset_email" placeholder="Email" required>
                         <span class="form-text small text-muted">Enter your registered email here</span>
                     </div>
                     <button type="submit" class="btn btn-sm btn-lime float-right">Reset Password</button>
 
-                </div>
-                <div class="collapse" id="signupForm">
+                </form>
+                <form class="collapse" action="javascript:signup()" id="signupForm">
+                    <div id="signup_alerts">
+
+                    </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" id="registration_email" placeholder="Email" required>
                         <span class="form-text small text-muted">Enter your email address here</span>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username" required>
+                        <input type="text" class="form-control" id="username" placeholder="Username" required>
                         <span class="form-text small text-muted">You will be identified by this name</span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required>
+                        <input type="password" class="form-control" id="registration_password" placeholder="Password"
+                               required>
                         <span class="form-text small text-muted">A new password for your account</span>
                     </div>
                     <button type="submit" class="btn btn-sm btn-lime float-right">SignUp</button>
 
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -97,7 +102,7 @@
                     <a class="nav-link text-lime" href="#myProfile">PROFILE</a>
                 </li>
                 <li class="nav-item" data-toggle="collapse" onclick="logout()" data-target="#mynav.show">
-                <a class="nav-link text-lime" href="#">LOGOUT</a>
+                    <a class="nav-link text-lime" href="#">LOGOUT</a>
                 </li>
             </ul>
         </div>
