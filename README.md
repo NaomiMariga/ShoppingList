@@ -3,6 +3,8 @@ Shopping list provides a platform for users to record and share items they want 
 
 Dummy login enabled by clicking the login button for testing
 
+[![Build Status](https://travis-ci.org/NaomiMariga/ShoppingList.svg?branch=develop)](https://travis-ci.org/NaomiMariga/ShoppingList)
+
 #### Functionalities and Features
 > Landing Page
 - User Registration

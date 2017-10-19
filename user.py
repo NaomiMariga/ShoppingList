@@ -17,7 +17,10 @@ class User:
                 if email not in self.user_emails:
                     if (username.isalnum() or username.isalpha()) and len(username) >= 5:
                         if len(password) >= 8 and password.isalnum():
-                            self.users.append({"email": email, "username": username, "password": password})
+                            self.users.append({
+                                "email": email, "username": username, "password": password,
+                                "lists": [], "list_items": []
+                            })
                             self.user_emails.append(email)
                             success = True
                             message = "User added successfully"
@@ -48,7 +51,7 @@ class User:
                         self.users_tokens.append({"user_id": user_id, "token": token})
                         username = self.users[user_id]["username"]
                         message = {
-                            "message": "Login successful, Welcome" + username,
+                            "message": "Login successful, Welcome " + username,
                             "user_id": user_id,
                             "user_name": username,
                             "token": token
@@ -118,10 +121,36 @@ class User:
         }
 
     def logged_in(self, token, user_id):
-        return
+        return {"user_id": int(user_id), "token": token} in self.users_tokens
 
     def change_password(self, token, user_id, old_password, new_password):
-        return
+        success = False
+        try:
+            if self.logged_in(token, user_id):
+                if old_password == self.users[user_id]["password"]:
+                    self.users[user_id]["password"] = new_password
+                    success = True
+                    message = "your password was successfully changed"
+                else:
+                    message = "password did not match your stored password"
+            else:
+                message = "user must be logged in to change password"
+        except Exception:
+            message = "An error occurred. Password was not changed"
+        return {
+            "success": success,
+            "message": message
+        }
 
     def log_out(self, token, user_id):
-        return
+        message = "Token was not logged in the system"
+        if self.logged_in(token, user_id):
+            self.users_tokens.remove({"user_id": user_id, "token": token})
+            message = "User was logged out successfully"
+
+        return {
+            "success": True,
+            "message": message
+        }
+
+

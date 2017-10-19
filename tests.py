@@ -15,7 +15,7 @@ class Tests(unittest.TestCase):
         self.assertIsInstance(self.user.registration(None, None, None), dict, "registration" + message)
         self.assertIsInstance(self.user.login(None, None), dict, "login" + message)
         self.assertIsInstance(self.user.forgot_password(None), dict, "forgot_password" + message)
-        self.assertIsInstance(self.user.logged_in(None, None), dict, "logged_in" + message)
+        self.assertIsInstance(self.user.logged_in(None, None), bool, "logged_in should return true or false")
         self.assertIsInstance(self.user.change_password(None, None, None, None), dict, "change_password" + message)
         self.assertIsInstance(self.shoppingList.add_list(None, None, None), dict, "add_list" + message)
         self.assertIsInstance(self.shoppingList.update_list(None, None, None, None), dict, "update_list" + message)
@@ -56,8 +56,8 @@ class Tests(unittest.TestCase):
     def test_05_if_provided_token_and_user_id_are_working(self):
         result1 = self.user.logged_in("token", "user_id")
         result2 = self.user.logged_in(self.token, self.user_id)
-        self.assertFalse(result1["success"], "invalid user-id and token combination for this session")
-        self.assertTrue(result2["success"], "The system should accept the token and user_id it provided")
+        self.assertFalse(result1, "invalid user-id and token combination for this session")
+        self.assertTrue(result2, "The system should accept the token and user_id it provided")
 
     def test_06_shopping_list_addition(self):
         result1 = self.shoppingList.add_list("list_name", None, None)
