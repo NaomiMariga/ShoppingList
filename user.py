@@ -1,3 +1,6 @@
+"""
+class user methods
+"""
 import random
 from validate_email import validate_email
 
@@ -25,7 +28,8 @@ class User:
                             success = True
                             message = "User added successfully"
                         else:
-                            message = "password must be at least 8 characters amd must contain both numbers and letters"
+                            message = "password must be at least 8 characters and" \
+                                      " must contain both numbers and letters"
                     else:
                         message = "username should only be alphanumeric and must be at least 5 characters long"
                 else:
@@ -71,8 +75,8 @@ class User:
             "message": message
         }
 
-    def token(self, n, characters):
-        out = ''.join([random.choice(characters) for i in range(n)])
+    def token(self, length, characters):
+        out = ''.join([random.choice(characters) for i in range(length)])
         return out
 
     def send_email(self, receiver, subject, message):
@@ -99,9 +103,9 @@ class User:
                     user_id = self.user_emails.index(email)
                     username = self.users[user_id]["username"]
                     temporary_password = self.token(10, "abcdefghijklmnopqrstuvwxyz")
-                    email_message = "Hello" + username + \
-                                    "use this new password to log in to you shopping list account \n"\
-                                    + temporary_password
+                    email_message = "Hello " + username + \
+                                    " use this new password to log in to you " \
+                                    "shopping list account \n" + temporary_password
                     if self.send_email(email, "ShoppingList Password Reset", email_message):
                         self.users[user_id]["password"] = temporary_password
                         success = True
@@ -121,14 +125,17 @@ class User:
         }
 
     def logged_in(self, token, user_id):
-        return {"user_id": int(user_id), "token": token} in self.users_tokens
+        try:
+            return {"user_id": int(user_id), "token": token} in self.users_tokens
+        except Exception:
+            return False
 
     def change_password(self, token, user_id, old_password, new_password):
         success = False
         try:
             if self.logged_in(token, user_id):
-                if old_password == self.users[user_id]["password"]:
-                    self.users[user_id]["password"] = new_password
+                if old_password == self.users[int(user_id)]["password"]:
+                    self.users[int(user_id)]["password"] = new_password
                     success = True
                     message = "your password was successfully changed"
                 else:
@@ -145,12 +152,10 @@ class User:
     def log_out(self, token, user_id):
         message = "Token was not logged in the system"
         if self.logged_in(token, user_id):
-            self.users_tokens.remove({"user_id": user_id, "token": token})
+            self.users_tokens.remove({"user_id": int(user_id), "token": token})
             message = "User was logged out successfully"
 
         return {
             "success": True,
             "message": message
         }
-
-
