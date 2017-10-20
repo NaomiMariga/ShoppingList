@@ -109,7 +109,7 @@
 
     </div>
     <!-- main page -->
-    <div class="container-fluid row" id="myLists" style="margin-top: 40px;   ">
+    <div class="container-fluid row"  style="margin-top: 40px;   ">
         <!-- Shopping Lists -->
         <div class="col-12 col-sm-4 col-md-3 list-group-flush">
             <h5 class="list-group-item-heading">My Lists
@@ -118,30 +118,21 @@
                    style="margin-right: 10px;"
                 ></a>
             </h5>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Back to School</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Groceries</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Back to School</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Back to School</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
+            <div id="myLists">
+                <a href="#" class="list-group-item flex-column">
+                    <div class="d-sm-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Back to School</h6>
+                        <span class="small text-muted"></span>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item flex-column">
+                    <div class="d-sm-flex w-100 justify-content-between">
+                        <h6 class="mb-1">Back to School</h6>
+                        <span class="small text-muted"></span>
+                    </div>
+                </a>
+            </div>
+
         </div>
 
         <!-- Auto complete for units -->
@@ -186,54 +177,6 @@
                     <td>0.00</td>
                     <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
                 </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -249,10 +192,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input class="form-control" type="text" placeholder="Name of your list...">
+                        <div id="new_list_alerts"></div>
+                        <input class="form-control" id = "new_list_name" type="text" placeholder="Name of your list...">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-lime">Add List</button>
+                        <button type="button" onclick="create_lists()" class="btn btn-sm btn-lime">Add List</button>
                     </div>
                 </div>
             </div>

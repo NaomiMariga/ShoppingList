@@ -67,8 +67,47 @@ function resetPassword() {
     })
 
 }
+function create_lists() {
+    let new_list = document.querySelector("#new_list_name");
+    let element = document.querySelector("#new_list_alerts");
+    $.ajax({
+        url: "shoppingList_create",
+        type: "POST",
+        data: {
+            list_name: new_list.value,
+            token: sessionStorage.getItem("token"),
+            user_id:sessionStorage.getItem("user_id")
+
+        },
+        dataType: "json",
+        success: function (response) {
+            if(response.success){
+                Alert(response.message,element,false);
+                new_list.value = "";
+                // $("#new_list").modal('hide');
+            }else {
+                Alert(response.message, element, true)
+            }
+
+        },
+        error: function (error) {
+            Alert("An error occurred, please try again",element, true)
+        }
+    })
+    
+}
+function read_lists() {
+    
+}
+function edit_lists() {
+
+}
+function delete_lists(){
+
+}
 function logout(){
     main_page.classList.add('d-none');
+
 
     if (login_page.classList.contains('d-none')){
         login_page.classList.remove('d-none');
