@@ -95,10 +95,10 @@
         </button>
         <div class="collapse navbar-collapse" id="mynav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active" href="#myLists" data-toggle="collapse" data-target="#mynav.show">
+                <li class="nav-item active" href="#myLists" onclick="menu(this, '#shopping_page')" data-toggle="collapse" data-target="#mynav.show">
                     <a class="nav-link text-lime" href="#">HOME</a>
                 </li>
-                <li class="nav-item" data-toggle="collapse" data-target="#mynav.show">
+                <li class="nav-item" data-toggle="collapse" onclick="menu(this, '#myProfile')" data-target="#mynav.show">
                     <a class="nav-link text-lime" href="#myProfile">PROFILE</a>
                 </li>
                 <li class="nav-item" data-toggle="collapse" onclick="logout()" data-target="#mynav.show">
@@ -109,7 +109,7 @@
 
     </div>
     <!-- main page -->
-    <div class="container-fluid row"  style="margin-top: 40px;   ">
+    <div id="shopping_page" class="container-fluid row"  style="margin-top: 40px;   ">
         <!-- Shopping Lists -->
         <div class="col-12 col-sm-4 col-md-3 list-group-flush">
             <h5 class="list-group-item-heading">My Lists
@@ -146,14 +146,15 @@
         <!-- Actual List -->
         <div class="col-12 col-sm-8 col-md-9">
             <h5>
-                Back to school
+                <span id = "list_name">Your List Items goes here</span>
                 <span class="float-right m-20 material "></span>
                 <a href="#" title="Delete" data-toggle="modal" data-target="#delete_list"
                    class="material material-delete m-20 float-right text-danger"></a>
                 <a href="#" title="Rename" data-toggle="modal" data-target="#rename_list"
                    class="material material-edit float-right text-lime m-20"></a>
-                <a href="#" title="Add Item" class="material material-plus-circle-o float-right text-lime m-20"></a>
+                <a href="#" onclick="add_item()" title="Add Item" class="material material-plus-circle-o float-right text-lime m-20"></a>
             </h5>
+            <div id="list_alerts"></div>
             <table class="table">
                 <thead>
                 <tr>
@@ -163,20 +164,11 @@
                     <td>Total</td>
                     <td>Remove</td>
                 </tr>
+                <tr>
+                    <td colspan="5" class="small muted">The items are automatically updated when you type</td>
+                </tr>
                 </thead>
                 <tbody id="list_items">
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -206,31 +198,33 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Rename List</h5>
+                        <div id = "edit_list_alert"></div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <p class="small">Change name for your list: </p>
-                        <input class="form-control" type="text" placeholder="Name of your list...">
+                        <input class="form-control" id="text_rename_list" type="text" placeholder="Name of your list...">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-lime">Rename</button>
+                        <button type="button" onclick="edit_lists()" class="btn btn-sm btn-lime">Rename</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal" id="delete_list">
+            <div id="delete_list_alert"></div>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Delete List Name?</h5>
+                        <h5 class="modal-title">Delete <span id="text_delete_list"></span>?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        <button type="button" onclick="delete_lists()" class="btn btn-sm btn-danger">Delete</button>
                     </div>
                 </div>
             </div>
@@ -238,12 +232,13 @@
     </div>
 
     <!-- Edit user profile -->
-    <div class="col-12 row justify-content-center d-none" id="myProfile">
-        <form class="col-12 col-sm-8 col-md-6 col-lg-5 md-form text-center">
+    <div class="col-12 row justify-content-center" style="visibility: hidden;" id="myProfile">
+        <form action="javascript: change_password()" class="col-12 col-sm-8 col-md-6 col-lg-5 md-form text-center" >
             <h5 class="text-center">Reset Password</h5>
-            <input type="password" class="form-control" title="" placeholder="Current Password">
-            <input type="password" class="form-control" title="" placeholder="New Password">
-            <input type="password" class="form-control" title="" placeholder="Confirm Password">
+            <div id="change_pass_alerts"></div>
+            <input type="password" class="form-control" title="" id="current_pass" placeholder="Current Password">
+            <input type="password" class="form-control" title="" id="new_pass" placeholder="New Password">
+            <input type="password" class="form-control" title="" id="conf_pass" placeholder="Confirm Password">
             <button type="submit" class="btn btn-lime btn-sm">Submit</button>
         </form>
     </div>

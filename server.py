@@ -12,7 +12,6 @@ shoppingList = ShoppingList(user)
 # Set up flask app
 # Define a custom static directory
 app = Flask(__name__, static_folder='designs/UI')
-app.debug = True
 
 
 # Covert Dictionary to JSON
@@ -241,4 +240,4 @@ def delete_items():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run("0.0.0.0", 8080)
