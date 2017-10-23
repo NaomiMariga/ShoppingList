@@ -8,4 +8,4 @@ install:
 script: python3.6 tests.py
 
 after_success:
-  - coveralls
+  - nosetests --with-coverage
