@@ -19,7 +19,7 @@ class User:
             if validate_email(email):
                 if email not in self.user_emails:
                     if (username.isalnum() or username.isalpha()) and len(username) >= 5:
-                        if len(password) >= 8 and password.isalnum():
+                        if len(password) >= 5 and password.isalnum():
                             self.users.append({
                                 "email": email, "username": username, "password": password,
                                 "lists": [], "list_items": []
@@ -28,7 +28,7 @@ class User:
                             success = True
                             message = "User added successfully"
                         else:
-                            message = "password must be at least 8 characters and" \
+                            message = "password must be at least 5 characters and" \
                                       " must contain both numbers and letters"
                     else:
                         message = "username should only be alphanumeric and must be at least 5 characters long"
@@ -104,8 +104,8 @@ class User:
                     username = self.users[user_id]["username"]
                     temporary_password = self.token(10, "abcdefghijklmnopqrstuvwxyz")
                     email_message = "Hello " + username + \
-                                    " use this new password to log in to you " \
-                                    "shopping list account \n" + temporary_password
+                                    "\nuse this new password to log in to you " \
+                                    "shopping list account \nPassword: " + temporary_password
                     if self.send_email(email, "ShoppingList Password Reset", email_message):
                         self.users[user_id]["password"] = temporary_password
                         success = True
@@ -135,9 +135,13 @@ class User:
         try:
             if self.logged_in(token, user_id):
                 if old_password == self.users[int(user_id)]["password"]:
-                    self.users[int(user_id)]["password"] = new_password
-                    success = True
-                    message = "your password was successfully changed"
+                    if len(new_password) >= 5 and new_password.isalnum():
+                        self.users[int(user_id)]["password"] = new_password
+                        success = True
+                        message = "your password was successfully changed"
+                    else:
+                        message = "password must be at least 8 characters and" \
+                                  " must contain both numbers and letters"
                 else:
                     message = "password did not match your stored password"
             else:

@@ -165,6 +165,7 @@ function read_lists() {
                     let a = document.createElement("a");
                     a.setAttribute("onclick", "read_items("+list.list_id+",\""+list.list_name+"\")");
                     a.className = "list-group-item flex-column";
+                    a.setAttribute("href","#"+list.list_name);
                     let div = document.createElement("div");
                     div.className = "d-sm-flex w-100 justify-content-between";
                     let h6 = document.createElement("h6");
@@ -173,12 +174,11 @@ function read_lists() {
                     h6.appendChild(text);
                     let span = document.createElement("span");
                     span.className = "small text-muted";
-                    div.appendChild(span);
                     div.appendChild(h6);
+                    div.appendChild(span);
                     a.appendChild(div);
                     my_lists.appendChild(a);
                     document.querySelector("#list_name").innerHTML = list.list_name;
-
                 }
             }
 
@@ -187,6 +187,10 @@ function read_lists() {
 }
 
 function add_item() {
+    let name = document.querySelector("#new_item_name");
+    let quantity = document.querySelector("#new_item_quantity");
+    let units = document.querySelector("#new_item_units");
+    let cost = document.querySelector("#new_item_cost");
     $.ajax({
         url: "add_items",
         type:"POST",
@@ -194,14 +198,20 @@ function add_item() {
             token: window.sessionStorage.getItem("token"),
             user_id: window.sessionStorage.getItem("user_id"),
             list_id: current_list_id,
-            item_name: "",
-            quantity: "",
-            units: "",
-            cost: ""
+            item_name: name.value,
+            quantity: quantity.value,
+            units: units.value,
+            cost: cost.value
         },
         success: function (response) {
             if(response.success){
                 read_items(current_list_id,current_list_name);
+                name.value = "";
+                quantity.value = "";
+                cost.value = "";
+                units.value = "";
+            }else{
+                alert(response.message);
             }
 
         }
@@ -233,6 +243,10 @@ function update_item(list_id, item_id, attribute, value) {
 function read_items(list_id, list_name) {
     current_list_name = list_name;
     current_list_id = list_id;
+    let items_holder = document.querySelector("#items_holder");
+    if(items_holder.classList.contains("d-none")){
+        items_holder.classList.remove("d-none");
+    }
     document.querySelector("#list_name").innerHTML = current_list_name;
     document.querySelector("#text_rename_list").value = current_list_name;
     document.querySelector("#text_delete_list").innerHTML = current_list_name;
@@ -318,7 +332,7 @@ function read_items(list_id, list_name) {
      */
 }
 
-function edit_lists(list_id) {
+function edit_lists() {
     let text_rename_list = document.querySelector("#text_rename_list");
     let element = document.querySelector("#edit_list_alert");
     $.ajax({
@@ -327,14 +341,15 @@ function edit_lists(list_id) {
         data:{
             user_id:window.sessionStorage.getItem("user_id"),
             token: window.sessionStorage.getItem("token"),
-            list_id:list_id,
+            list_id:current_list_id,
             list_name:text_rename_list.value
         },
         success: function (response) {
             if(response.success){
                 current_list_name = text_rename_list.value;
-                read_lists()
-
+                Alert(response.message,element,false);
+                read_lists();
+                $("#rename_list").modal('hide');
             }else {
                 Alert(response.message, element,true);
             }
@@ -356,6 +371,8 @@ function delete_lists(){
         },
         success: function (response) {
             if(response.success){
+                let items_holder = document.querySelector("#items_holder");
+                items_holder.classList.add("d-none");
                 let list_items = document.querySelector("#list_items");
                 while (list_items.hasChildNodes()){
                     list_items.removeChild(list_items.lastChild);
@@ -440,6 +457,7 @@ let signup = function () {
                 email.value = "";
                 username.value = "";
                 password.value= "";
+                $('#loginForm').collapse("show");
             }else{
                 Alert(response.message, element, true);
             }

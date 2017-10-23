@@ -90,7 +90,7 @@ class ShoppingList:
         success = False
         try:
             if self.user.logged_in(token, user_id):
-                if item_name is not None:
+                if item_name is not None and item_name.strip() is not "":
                     self.user.users[int(user_id)]["list_items"][int(list_id)].append({
                         "item_name": item_name, "quantity": quantity, "units": units, "cost": cost
                     })
@@ -136,7 +136,11 @@ class ShoppingList:
                     message = attribute + " updated successfully"
                     success = True
                     if attribute == "item_name":
-                        self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["item_name"] = str(value)
+                        if value is not None and value.trim() is not "":
+                            self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["item_name"] = str(value)
+                        else:
+                            success = False
+                            message = "list name cannot be empty"
                     elif attribute == "quantity":
                         self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["quantity"] = value
                     elif attribute == "cost":
