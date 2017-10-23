@@ -136,7 +136,7 @@ class ShoppingList:
                     message = attribute + " updated successfully"
                     success = True
                     if attribute == "item_name":
-                        if value is not None and value.trim() is not "":
+                        if value is not None and value.strip() is not "":
                             self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["item_name"] = str(value)
                         else:
                             success = False

@@ -219,7 +219,7 @@ def edit_items():
     else:
         out = {
             "success": False,
-            "message" : "Use POST to get required variables item_id, user_id, token and list_id"
+            "message": "Use POST to get required variables item_id, user_id, token and list_id"
         }
     return Response(dict_to_json(out), mimetype="text\json")
 

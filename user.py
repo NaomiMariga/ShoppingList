@@ -18,7 +18,7 @@ class User:
         try:
             if validate_email(email):
                 if email not in self.user_emails:
-                    if (username.isalnum() or username.isalpha()) and len(username) >= 5:
+                    if (username.isalnum() or username.isalpha()) and len(username) >= 6:
                         if len(password) >= 5 and password.isalnum():
                             self.users.append({
                                 "email": email, "username": username, "password": password,
@@ -28,7 +28,7 @@ class User:
                             success = True
                             message = "User added successfully"
                         else:
-                            message = "password must be at least 5 characters and" \
+                            message = "password must be at least 6 characters and" \
                                       " must contain both numbers and letters"
                     else:
                         message = "username should only be alphanumeric and must be at least 5 characters long"

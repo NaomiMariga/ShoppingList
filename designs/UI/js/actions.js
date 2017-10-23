@@ -219,12 +219,12 @@ function add_item() {
 
 }
 
-function update_item(list_id, item_id, attribute, value) {
+function update_item(item_id, attribute, value) {
     $.ajax({
         url: "edit_items",
         type: "POST",
         data: {
-            list_id: list_id,
+            list_id: current_list_id,
             item_id: item_id,
             attribute: attribute,
             value:value,
@@ -272,13 +272,13 @@ function read_items(list_id, list_name) {
                 input_1.value = item.item_name;
                 input_1.className = "form-control";
                 input_1.setAttribute("placeholder", "Item");
-                input_1.setAttribute("onchange","update_item("+list_id+", "+item.item_id+", 'item_name', this.value)");
+                input_1.setAttribute("onchange","update_item("+item.item_id+", 'item_name', this.value)");
                 td1.appendChild(input_1);
                 let td2 = document.createElement("td");
                 let input_2 = document.createElement("input");
                 input_2.type = "text";
                 input_2.className = "form-control form-control-sm float-left quantity";
-                input_2.setAttribute("onchange","update_item("+list_id+", "+item.item_id+", 'quantity', this.value)");
+                input_2.setAttribute("onchange","update_item("+item.item_id+", 'quantity', this.value)");
                 input_2.setAttribute("placeholder", "Quantity");
                 input_2.value = item.quantity;
                 td2.appendChild(input_2);
@@ -288,7 +288,7 @@ function read_items(list_id, list_name) {
                 input_3.setAttribute("list", "units");
                 input_3.setAttribute("placeholder", "");
                 input_3.value = item.units;
-                input_3.setAttribute("onchange","update_item("+list_id+", "+item.item_id+", 'units', this.value)");
+                input_3.setAttribute("onchange","update_item("+item.item_id+", 'units', this.value)");
                 td2.appendChild(input_3);
                 let td3 = document.createElement("td");
                 let input_4 = document.createElement("input");
@@ -297,7 +297,7 @@ function read_items(list_id, list_name) {
                 input_4.setAttribute("placeholder", "Cost");
                 input_4.setAttribute("title", "Cost per item");
                 input_4.value = item.cost;
-                input_4.setAttribute("onchange","update_item("+list_id+", "+item.item_id+", 'cost', this.value)");
+                input_4.setAttribute("onchange","update_item("+item.item_id+", 'cost', this.value)");
                 td3.appendChild(input_4);
                 let td4 = document.createElement("td");
                 let td5 = document.createElement("td");
