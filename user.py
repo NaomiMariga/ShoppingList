@@ -18,8 +18,8 @@ class User:
         try:
             if validate_email(email):
                 if email not in self.user_emails:
-                    if (username.isalnum() or username.isalpha()) and len(username) >= 6:
-                        if len(password) >= 5 and password.isalnum():
+                    if (username.isalnum() or username.isalpha()) and len(username) >= 5:
+                        if len(password) >= 6 and password.isalnum():
                             self.users.append({
                                 "email": email, "username": username, "password": password,
                                 "lists": [], "list_items": []
@@ -135,7 +135,7 @@ class User:
         try:
             if self.logged_in(token, user_id):
                 if old_password == self.users[int(user_id)]["password"]:
-                    if len(new_password) >= 5 and new_password.isalnum():
+                    if len(new_password) >= 6 and new_password.isalnum():
                         self.users[int(user_id)]["password"] = new_password
                         success = True
                         message = "your password was successfully changed"
