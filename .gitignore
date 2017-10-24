@@ -4,3 +4,4 @@ __pycache__
 user.pyc
 sample_store.json
 .coverage
+.coveragerc

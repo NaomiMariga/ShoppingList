@@ -222,7 +222,7 @@ function add_item() {
 function update_item(item_id, attribute, value) {
     $.ajax({
         url: "edit_items",
-        type: "POST",
+        type: "PUT",
         data: {
             list_id: current_list_id,
             item_id: item_id,
@@ -337,7 +337,7 @@ function edit_lists() {
     let element = document.querySelector("#edit_list_alert");
     $.ajax({
         url: "edit_lists",
-        type:"POST",
+        type:"PUT",
         data:{
             user_id:window.sessionStorage.getItem("user_id"),
             token: window.sessionStorage.getItem("token"),
@@ -363,7 +363,7 @@ function delete_lists(){
     let element = document.querySelector("#delete_list_alert");
     $.ajax({
         url: "delete_lists",
-        type: "POST",
+        type: "DELETE",
         data: {
             user_id: window.sessionStorage.getItem("user_id"),
             token: window.sessionStorage.getItem("token"),
@@ -400,7 +400,7 @@ function delete_item(item_id, list_id) {
     let element = document.querySelector("#list_alerts");
     $.ajax({
         url: "delete_items",
-        type: "POST",
+        type: "DELETE",
         data: {
             item_id:item_id,
             list_id: list_id,

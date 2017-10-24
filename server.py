@@ -32,7 +32,7 @@ def static_proxy(path):
     return app.send_static_file(path)
 
 
-@app.route('/register', methods=['POST', 'GET'])
+@app.route('/register', methods=['POST'])
 def registration_submit():
 
     if request.method == 'POST':
@@ -125,9 +125,9 @@ def read_lists():
     return Response(dict_to_json(out), mimetype="text/json")
 
 
-@app.route('/edit_lists', methods=['POST'])
+@app.route('/edit_lists', methods=['PUT'])
 def edit_lists():
-    if request.method == 'POST':
+    if request.method == 'PUT':
         list_id = request.form.get('list_id')
         token = request.form.get('token')
         user_id = request.form.get('user_id')
@@ -138,7 +138,7 @@ def edit_lists():
             "success": False,
             "message": "use POST and required variables are list_id, token, user_id and list_name"
         }
-    return Response(dict_to_json(out), mimetype= "text/json")
+    return Response(dict_to_json(out), mimetype="text/json")
 
 
 @app.route("/logout", methods=['POST'])
@@ -156,9 +156,9 @@ def logout():
     return Response(dict_to_json(out), mimetype="text/json")
 
 
-@app.route('/delete_lists', methods=['POST'])
+@app.route('/delete_lists', methods=['DELETE'])
 def delete_lists():
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         list_id = request.form.get('list_id')
         user_id = request.form.get('user_id')
         token = request.form.get('token')
@@ -206,9 +206,9 @@ def read_items():
     return Response(dict_to_json(out), mimetype="text/json")
 
 
-@app.route('/edit_items', methods=['POST'])
+@app.route('/edit_items', methods=['PUT'])
 def edit_items():
-    if request.method == 'POST':
+    if request.method == 'PUT':
         item_id = request.form.get('item_id')
         user_id = request.form.get('user_id')
         token = request.form.get('token')
@@ -224,9 +224,9 @@ def edit_items():
     return Response(dict_to_json(out), mimetype="text\json")
 
 
-@app.route('/delete_items', methods=['POST'])
+@app.route('/delete_items', methods=['DELETE'])
 def delete_items():
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         item_id = request.form.get('item_id')
         user_id = request.form.get('user_id')
         token = request.form.get('token')
