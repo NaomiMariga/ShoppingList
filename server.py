@@ -4,7 +4,7 @@ running application methods
 from user import User
 import json
 import os
-from flask import Flask, request, Response
+from flask import Flask, request, Response, render_template
 from shoppingList import ShoppingList
 
 user = User()
@@ -111,16 +111,16 @@ def create_new_list():
     return Response(dict_to_json(out), mimetype="text/json")
 
 
-@app.route('/read_lists', methods=['POST'])
+@app.route('/read_lists', methods=['POST', 'GET'])
 def read_lists():
-    if request.method == 'POST':
-        user_id = request.form.get('user_id')
-        token = request.form.get('token')
+    if request.method == 'GET':
+        user_id = request.args.get('user_id', None)
+        token = request.args.get('token', None)
         out = shoppingList.read_lists(user_id, token)
     else:
         out = {
             "success": False,
-            "message": "use the POST method to provide user_id and token"
+            "message": "use the GET method to provide user_id and token"
         }
     return Response(dict_to_json(out), mimetype="text/json")
 
@@ -191,12 +191,12 @@ def add_items():
     return Response(dict_to_json(out), mimetype="text/json")
 
 
-@app.route('/read_items', methods=['POST'])
+@app.route('/read_items', methods=['POST', 'GET'])
 def read_items():
-    if request.method == 'POST':
-        user_id = request.form.get('user_id')
-        token = request.form.get('token')
-        list_id = request.form.get("list_id")
+    if request.method == 'GET':
+        user_id = request.args.get('user_id', None)
+        token = request.args.get('token', None)
+        list_id = request.args.get("list_id", None)
         out = shoppingList.read_items(user_id, token, list_id)
     else:
         out = {

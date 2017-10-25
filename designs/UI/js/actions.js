@@ -140,13 +140,16 @@ function change_password(){
 function read_lists() {
    let my_lists = document.querySelector("#myLists");
     $.ajax({
+        async:true,
+        crossDomain: true,
         url: "read_lists",
-        type: "POST",
+        type: "GET",
+        headers:{},
         data:{
-            token:sessionStorage.getItem("token"),
-            user_id:sessionStorage.getItem("user_id"),
-
-        }, 
+                token:sessionStorage.getItem("token"),
+                user_id:sessionStorage.getItem("user_id")
+        },
+        dataType:"json",
         success: function (response) {
             if(response.success){
                 /*
@@ -252,8 +255,13 @@ function read_items(list_id, list_name) {
     document.querySelector("#text_delete_list").innerHTML = current_list_name;
     let list_items = document.querySelector("#list_items");
     $.ajax({
+        async:true,
+        crossDomain: true,
         url: "read_items",
-        type: "POST",
+        type: "GET",
+        headers:{
+
+        },
         data:{
             user_id: sessionStorage.getItem("user_id"),
             token: sessionStorage.getItem("token"),
