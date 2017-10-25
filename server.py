@@ -111,7 +111,7 @@ def create_new_list():
     return Response(dict_to_json(out), mimetype="text/json")
 
 
-@app.route('/read_lists', methods=['POST', 'GET'])
+@app.route('/read_lists', methods=['GET'])
 def read_lists():
     if request.method == 'GET':
         user_id = request.args.get('user_id', None)
@@ -136,7 +136,7 @@ def edit_lists():
     else:
         out = {
             "success": False,
-            "message": "use POST and required variables are list_id, token, user_id and list_name"
+            "message": "use PUT and required variables are list_id, token, user_id and list_name"
         }
     return Response(dict_to_json(out), mimetype="text/json")
 
@@ -166,7 +166,7 @@ def delete_lists():
     else:
         out = {
             "success": False,
-            "message": "use POST to get required variables: list_id, user_id, token"
+            "message": "use DELETE to get required variables: list_id, user_id, token"
         }
     return Response(dict_to_json(out), mimetype="text/json")
 
@@ -201,7 +201,7 @@ def read_items():
     else:
         out = {
             "success": False,
-            "message": "Use POST to get required variables: user_id, token and list_id"
+            "message": "Use GET to get required variables: user_id, token and list_id"
         }
     return Response(dict_to_json(out), mimetype="text/json")
 
@@ -219,7 +219,7 @@ def edit_items():
     else:
         out = {
             "success": False,
-            "message": "Use POST to get required variables item_id, user_id, token and list_id"
+            "message": "Use PUT to get required variables item_id, user_id, token and list_id"
         }
     return Response(dict_to_json(out), mimetype="text\json")
 
@@ -235,7 +235,7 @@ def delete_items():
     else:
         out = {
             "success": False,
-            "message": "use POST tp get required variables:item_id, user_id, token and list_id"
+            "message": "use DELETE tp get required variables:item_id, user_id, token and list_id"
         }
     return Response(dict_to_json(out), mimetype="text/json")
 
