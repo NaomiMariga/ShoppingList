@@ -27,7 +27,7 @@
                 managing the list of things you wish to purchase </h5>
         </div>
         <div class="jumbotron">
-            <form class="md-form">
+            <div class="md-form">
                 <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#signupForm">
                     Sign Up
                 </button>
@@ -37,44 +37,49 @@
                 <button type="button" class="btn btn-lime btn-lg" data-toggle="collapse" data-target="#pass_reset">
                     Reset Password
                 </button>
-                <div class="collapse" id="loginForm">
+                <form action="javascript:login()" class="collapse" id="loginForm">
+                    <div id="login_alerts"></div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" id="login_email" placeholder="Email" required>
                         <span class="form-text small text-muted">Enter your registered email here</span>
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required>
+                        <input type="password" class="form-control" id="login_password" placeholder="Password" required>
                         <span class="form-text small text-muted">Enter your password here</span>
                     </div>
-                    <button type="button" class="btn btn-sm btn-lime float-right" onclick="login()">Login</button>
+                    <button type="submit" class="btn btn-sm btn-lime float-right">Login</button>
 
-                </div>
-                <div class="collapse" id="pass_reset">
+                </form>
+                <form class="collapse" id="pass_reset" action="javascript:resetPassword()">
+                    <div id="reset_password_alerts"></div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" id="reset_email" placeholder="Email" required>
                         <span class="form-text small text-muted">Enter your registered email here</span>
                     </div>
                     <button type="submit" class="btn btn-sm btn-lime float-right">Reset Password</button>
 
-                </div>
-                <div class="collapse" id="signupForm">
+                </form>
+                <form class="collapse" action="javascript:signup()" id="signupForm">
+                    <div id="signup_alerts">
+
+                    </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email" required>
+                        <input type="email" class="form-control" id="registration_email" placeholder="Email" required>
                         <span class="form-text small text-muted">Enter your email address here</span>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username" required>
+                        <input type="text" class="form-control" id="username" placeholder="Username" required>
                         <span class="form-text small text-muted">You will be identified by this name</span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password" required>
+                        <input type="password" class="form-control" id="registration_password" placeholder="Password"
+                               required>
                         <span class="form-text small text-muted">A new password for your account</span>
                     </div>
                     <button type="submit" class="btn btn-sm btn-lime float-right">SignUp</button>
 
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -90,21 +95,21 @@
         </button>
         <div class="collapse navbar-collapse" id="mynav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active" href="#myLists" data-toggle="collapse" data-target="#mynav.show">
+                <li class="nav-item active" href="#myLists" onclick="menu(this, '#shopping_page')" data-toggle="collapse" data-target="#mynav.show">
                     <a class="nav-link text-lime" href="#">HOME</a>
                 </li>
-                <li class="nav-item" data-toggle="collapse" data-target="#mynav.show">
+                <li class="nav-item" data-toggle="collapse" onclick="menu(this, '#myProfile')" data-target="#mynav.show">
                     <a class="nav-link text-lime" href="#myProfile">PROFILE</a>
                 </li>
                 <li class="nav-item" data-toggle="collapse" onclick="logout()" data-target="#mynav.show">
-                <a class="nav-link text-lime" href="#">LOGOUT</a>
+                    <a class="nav-link text-lime" href="#">LOGOUT</a>
                 </li>
             </ul>
         </div>
 
     </div>
     <!-- main page -->
-    <div class="container-fluid row" id="myLists" style="margin-top: 40px;   ">
+    <div id="shopping_page" class="container-fluid row"  style="margin-top: 40px;   ">
         <!-- Shopping Lists -->
         <div class="col-12 col-sm-4 col-md-3 list-group-flush">
             <h5 class="list-group-item-heading">My Lists
@@ -113,30 +118,21 @@
                    style="margin-right: 10px;"
                 ></a>
             </h5>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Back to School</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Groceries</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Back to School</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
-            <a href="#" class="list-group-item flex-column">
-                <div class="d-sm-flex w-100 justify-content-between">
-                    <h6 class="mb-1">Back to School</h6>
-                    <span class="small text-muted">2min ago</span>
-                </div>
-            </a>
+            <div id="myLists">
+                <a href="#" class="list-group-item flex-column">
+                    <div class="d-sm-flex w-100 justify-content-between">
+                        <h6 class="mb-1"></h6>
+                        <span class="small text-muted"></span>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item flex-column">
+                    <div class="d-sm-flex w-100 justify-content-between">
+                        <h6 class="mb-1"></h6>
+                        <span class="small text-muted"></span>
+                    </div>
+                </a>
+            </div>
+
         </div>
 
         <!-- Auto complete for units -->
@@ -148,16 +144,16 @@
             <option value="Piece"></option>
         </datalist>
         <!-- Actual List -->
-        <div class="col-12 col-sm-8 col-md-9">
+        <div id="items_holder" class="col-12 col-sm-8 col-md-9 d-none">
             <h5>
-                Back to school
+                <span id = "list_name">Your List Items goes here</span>
                 <span class="float-right m-20 material "></span>
                 <a href="#" title="Delete" data-toggle="modal" data-target="#delete_list"
                    class="material material-delete m-20 float-right text-danger"></a>
                 <a href="#" title="Rename" data-toggle="modal" data-target="#rename_list"
                    class="material material-edit float-right text-lime m-20"></a>
-                <a href="#" title="Add Item" class="material material-plus-circle-o float-right text-lime m-20"></a>
             </h5>
+            <div id="list_alerts"></div>
             <table class="table">
                 <thead>
                 <tr>
@@ -167,69 +163,25 @@
                     <td>Total</td>
                     <td>Remove</td>
                 </tr>
+                <tr>
+                    <td colspan="5" class="small muted">The items are automatically updated when you type</td>
+                </tr>
                 </thead>
                 <tbody id="list_items">
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
-                <tr>
-                    <td><input type="text" class="form-control" placeholder="Item"></td>
-                    <td>
-                        <input type="text" class="form-control form-control-sm float-left quantity"
-                               placeholder="Quantity">
-                        <input type="text" class="form-control form-control-sm float-right units" list="units"
-                               placeholder="">
-                    </td>
-                    <td><input type="text" class="form-control" placeholder="Cost" title="Cost per item"></td>
-                    <td>0.00</td>
-                    <td><a href="#!remove" class="material material-minus-circle-outline text-danger"></a></td>
-                </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" required="required" class="form-control" id="new_item_name" placeholder="Item"></td>
+                        <td>
+                            <input type="text" id="new_item_quantity" class="form-control form-control-sm float-left quantity"
+                                   placeholder="Quantity">
+                            <input type="text" id="new_item_units" class="form-control form-control-sm float-right units" list="units"
+                                   placeholder="">
+                        </td>
+                        <td><input type="text" id="new_item_cost" class="form-control" placeholder="Cost" title="Cost per item"></td>
+                        <td colspan="2"><a href="#" onclick="add_item()" class="btn btn-outline-success btn-sm text-lime" title="New Item">Add</a></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 
@@ -244,10 +196,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input class="form-control" type="text" placeholder="Name of your list...">
+                        <div id="new_list_alerts"></div>
+                        <input class="form-control" id = "new_list_name" type="text" placeholder="Name of your list...">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-lime">Add List</button>
+                        <button type="button" onclick="create_lists()" class="btn btn-sm btn-lime">Add List</button>
                     </div>
                 </div>
             </div>
@@ -257,31 +210,33 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Rename List</h5>
+                        <div id = "edit_list_alert"></div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <p class="small">Change name for your list: </p>
-                        <input class="form-control" type="text" placeholder="Name of your list...">
+                        <input class="form-control" id="text_rename_list" type="text" placeholder="Name of your list...">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-lime">Rename</button>
+                        <button type="button" onclick="edit_lists()" class="btn btn-sm btn-lime">Rename</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal" id="delete_list">
+            <div id="delete_list_alert"></div>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Delete List Name?</h5>
+                        <h5 class="modal-title">Delete <span id="text_delete_list"></span>?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span class="material material-close-circle-o text-danger" aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        <button type="button" onclick="delete_lists()" class="btn btn-sm btn-danger">Delete</button>
                     </div>
                 </div>
             </div>
@@ -289,12 +244,13 @@
     </div>
 
     <!-- Edit user profile -->
-    <div class="col-12 row justify-content-center d-none" id="myProfile">
-        <form class="col-12 col-sm-8 col-md-6 col-lg-5 md-form text-center">
+    <div class="col-12 row justify-content-center" style="visibility: hidden;" id="myProfile">
+        <form action="javascript: change_password()" class="col-12 col-sm-8 col-md-6 col-lg-5 md-form text-center" >
             <h5 class="text-center">Reset Password</h5>
-            <input type="password" class="form-control" title="" placeholder="Current Password">
-            <input type="password" class="form-control" title="" placeholder="New Password">
-            <input type="password" class="form-control" title="" placeholder="Confirm Password">
+            <div id="change_pass_alerts"></div>
+            <input type="password" class="form-control" title="" id="current_pass" placeholder="Current Password">
+            <input type="password" class="form-control" title="" id="new_pass" placeholder="New Password">
+            <input type="password" class="form-control" title="" id="conf_pass" placeholder="Confirm Password">
             <button type="submit" class="btn btn-lime btn-sm">Submit</button>
         </form>
     </div>
