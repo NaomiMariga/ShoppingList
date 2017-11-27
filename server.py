@@ -20,7 +20,7 @@ def dict_to_json(dct):
     return json.dumps(dct, sort_keys=True, indent=4, separators=(',', ': '))
 
 
-# Routes
+# Routes 
 @app.route('/')
 def root():
     return app.send_static_file('index.html')

@@ -25,6 +25,7 @@ let main_page = document.querySelector('#mainPage');
 function login() {
     let email = document.querySelector("#login_email");
     let password = document.querySelector("#login_password");
+    let user_session = document.querySelector('#user_session');
     $.ajax({
         url: "login",
         type: "POST",
@@ -42,11 +43,15 @@ function login() {
                 window.sessionStorage.setItem("user_id", response.message.user_id);
                 window.sessionStorage.setItem("username", response.message.username);
 
+                user_session.value = "Logged in as " + response.message.username;
+
+
                 read_lists();
                 login_page.classList.add('d-none');
                 if(main_page.classList.contains('d-none')){
                     main_page.classList.remove('d-none');
                 }
+
 
             }else{
                 password.value = "";
@@ -157,7 +162,6 @@ function read_lists() {
                     <div class="d-sm-flex w-100 justify-content-between">
                         <h6 class="mb-1">Back to School</h6>
                         <span class="small text-muted"></span>
-
                  */
                 let lists = response.message;
                 while(my_lists.hasChildNodes()){
@@ -308,6 +312,12 @@ function read_items(list_id, list_name) {
                 input_4.setAttribute("onchange","update_item("+item.item_id+", 'cost', this.value)");
                 td3.appendChild(input_4);
                 let td4 = document.createElement("td");
+                let input_6 = document.createElement("input");
+                input_6.className= "form-control";
+                input_6.id="total";
+                input_6.setAttribute("placeholder", "Total");
+                input_6.value = item.cost *item.quantity;
+                td4.appendChild(input_6).disabled = true;
                 let td5 = document.createElement("td");
                 let a = document.createElement("a");
                 a.className ="material material-minus-circle-outline text-danger";
@@ -524,4 +534,3 @@ function Alert(message, element, error)
         element.removeChild(div);
     }, 6000);
 }
-

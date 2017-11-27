@@ -57,7 +57,7 @@ class User:
                         message = {
                             "message": "Login successful, Welcome " + username,
                             "user_id": user_id,
-                            "user_name": username,
+                            "username": username,
                             "token": token
                         }
                     else:
