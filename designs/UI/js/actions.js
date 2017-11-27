@@ -1,5 +1,6 @@
 let current_list_name = undefined;
 let current_list_id = undefined;
+let items_Alerts = document.querySelector('#items_Alerts');
 
 $('#signupForm').on('shown.bs.collapse', function () {
   // do something…
@@ -218,7 +219,7 @@ function add_item() {
                 cost.value = "";
                 units.value = "";
             }else{
-                alert(response.message);
+                Alert(response.message, items_Alerts, true);
             }
 
         }
@@ -240,8 +241,9 @@ function update_item(item_id, attribute, value) {
         },
         success: function (response) {
             if(!response.success){
-                alert(response.message);
+                Alert(response.message, items_Alerts, true);
             }
+            read_items(current_list_id, current_list_name);
         }
     })
 
@@ -298,7 +300,7 @@ function read_items(list_id, list_name) {
                 input_3.type = "text";
                 input_3.className = "form-control form-control-sm float-right units";
                 input_3.setAttribute("list", "units");
-                input_3.setAttribute("placeholder", "");
+                input_3.setAttribute("placeholder", "units");
                 input_3.value = item.units;
                 input_3.setAttribute("onchange","update_item("+item.item_id+", 'units', this.value)");
                 td2.appendChild(input_3);
@@ -312,11 +314,9 @@ function read_items(list_id, list_name) {
                 input_4.setAttribute("onchange","update_item("+item.item_id+", 'cost', this.value)");
                 td3.appendChild(input_4);
                 let td4 = document.createElement("td");
-                let input_6 = document.createElement("input");
-                input_6.className= "form-control";
-                input_6.id="total";
-                input_6.setAttribute("placeholder", "Total");
-                input_6.value = item.cost *item.quantity;
+                let input_6 = document.createElement("span");
+                let total = item.cost *item.quantity;
+                input_6.appendChild(new Text(""+total));
                 td4.appendChild(input_6).disabled = true;
                 let td5 = document.createElement("td");
                 let a = document.createElement("a");

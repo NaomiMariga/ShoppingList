@@ -148,14 +148,16 @@ class ShoppingList:
                             success = False
                             message = "list name cannot be empty"
                     elif attribute == "quantity":
-                        if value.isdigit:
+                        if value.isdigit():
                             self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["quantity"] = value
                         else:
+                            success = False
                             message = "quantity must be a digit"
                     elif attribute == "cost":
                         if value.isdigit():
                             self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["cost"] = value
                         else:
+                            success = False
                             message = "cost must be a digit"
                     elif attribute == "units":
                         self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["units"] = value
