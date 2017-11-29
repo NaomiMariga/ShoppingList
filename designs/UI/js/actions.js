@@ -456,36 +456,41 @@ function logout(){
 }
 
 let signup = function () {
+    let element = document.querySelector("#signup_alerts");
     let email = document.querySelector("#registration_email");
     let username = document.querySelector("#username");
     let password = document.querySelector("#registration_password");
-    $.ajax({
-        url: "register",
-        type: "POST",
-        data: {
-            email: email.value,
-            username: username.value,
-            password: password.value
-        },
-        dataType:"json",
-        success: function (response) {
-            let element = document.querySelector("#signup_alerts");
-            if(response.success){
-                Alert(response.message, element, false);
-                email.value = "";
-                username.value = "";
-                password.value= "";
-                $('#loginForm').collapse("show");
-            }else{
-                Alert(response.message, element, true);
+    let confirm_password = document.querySelector("#confirm_password");
+    if (confirm_password.value === password.value){
+        $.ajax({
+            url: "register",
+            type: "POST",
+            data: {
+                email: email.value,
+                username: username.value,
+                password: password.value
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    Alert(response.message, element, false);
+                    email.value = "";
+                    username.value = "";
+                    password.value = "";
+                    $('#loginForm').collapse("show");
+                } else {
+                    Alert(response.message, element, true);
+                }
+            },
+            error: function (error) {
+                Alert("An error occurred", element, false);
+                console.log(error);
             }
-        },
-        error: function (error) {
-          Alert("An error occurred", element, false);
-          console.log(error);
-        }
 
-    });
+        });
+    } else {
+        Alert("Passwords do not match", element, true);
+    }
 };
 
 function menu(current, show){
