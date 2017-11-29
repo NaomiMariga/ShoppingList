@@ -7,7 +7,7 @@ Dummy login enabled by clicking the login button for testing
 [![Coverage Status](https://coveralls.io/repos/github/NaomiMariga/ShoppingList/badge.svg?branch=develop)](https://coveralls.io/github/NaomiMariga/ShoppingList?branch=develop)
 #### Functionalities and Features
 ###### Landing Page
-[Index](/ShoppingList/blob/develop/designs/screenshots/index_page.png)
+[Index](https://github.com/NaomiMariga/ShoppingList/blob/develop/designs/screenshots/index_page.png)
 
 - User Registration
 - User Login
@@ -15,7 +15,7 @@ Dummy login enabled by clicking the login button for testing
 - Password Reset
     > - Upon requesting for password reset, a new password is sent to the user email
 ###### Main Page
-[Dashboard](/ShoppingList/blob/develop/designs/screenshots/dashboard.png)
+[Dashboard](https://github.com/NaomiMariga/ShoppingList/blob/develop/designs/screenshots/dashboard.png)
 
    - User is redirected to this page after successful login
    - From this point the user can manage the account by changing the password and perform other activities as listed below
