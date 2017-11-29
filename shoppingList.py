@@ -13,7 +13,7 @@ class ShoppingList:
         success = False
         try:
             if self.user.logged_in(token, user_id):
-                if list_name is not None:
+                if list_name is not None and list_name.strip() is not "":
                     self.user.users[int(user_id)]["lists"].append(str(list_name))
                     self.user.users[int(user_id)]["list_items"].append([])
                     success = True
