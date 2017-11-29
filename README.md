@@ -10,9 +10,11 @@ Dummy login enabled by clicking the login button for testing
 - User Registration
 - User Login
 - Password Reset
+[![Index page](https://github.com/NaomiMariga/ShoppingList/blob/develop/designs/screenshots/index_page.png)]
 > Main Page
 - create shopping lists
 - Edit Shopping lists
 - Delete Shopping lists
+[![Dashboard]https://github.com/NaomiMariga/ShoppingList/blob/develop/designs/screenshots/dashboard.png]
 - Automatic cost calculation
 - DOM implementation for fast page operation
