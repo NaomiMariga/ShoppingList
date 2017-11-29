@@ -19,17 +19,22 @@ class User:
             if validate_email(email):
                 if email not in self.user_emails:
                     if (username.isalnum() or username.isalpha()) and len(username) >= 5:
-                        if len(password) >= 6 and password.isalnum():
-                            self.users.append({
-                                "email": email, "username": username, "password": password,
-                                "lists": [], "list_items": []
-                            })
-                            self.user_emails.append(email)
-                            success = True
-                            message = "User added successfully"
+                        if len(password) >= 6:
+                            if any(letter.isdigit() for letter in password) and any(letter.isalpha() for letter in password):
+                                if password == password.replace(" ", ""):
+                                    self.users.append({
+                                        "email": email, "username": username, "password": password,
+                                        "lists": [], "list_items": []
+                                    })
+                                    self.user_emails.append(email)
+                                    success = True
+                                    message = "User added successfully"
+                                else:
+                                    message = "Password cannot contain spaces"
+                            else:
+                                message = " Password must contain both numbers and letters"
                         else:
-                            message = "password must be at least 6 characters and" \
-                                      " must contain both numbers and letters"
+                            message = "password must be at least 6 characters"
                     else:
                         message = "username should only be alphanumeric and must be at least 5 characters long"
                 else:
