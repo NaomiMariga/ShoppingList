@@ -2,21 +2,18 @@
 class user methods
 """
 import random
-from validate_email import validate_email
+import re
 
 
 class User:
     users = []
     user_emails = []
-    token = None
-    username = None
     users_tokens = []
-    out = None
 
     def registration(self, email, username: str, password: str):
         success = False
         try:
-            if validate_email(email):
+            if re.match("[^@]+@[^@]+\.[^@]+", email):
                 if email not in self.user_emails:
                     if (username.isalnum() or username.isalpha()) and len(username) >= 5:
                         if len(password) >= 6:
@@ -51,7 +48,7 @@ class User:
     def login(self, email, password):
         success = False
         try:
-            if validate_email(email):
+            if re.match("[^@]+@[^@]+\.[^@]+", email):
                 if email in self.user_emails:
                     user_id = self.user_emails.index(email)
                     if password == self.users[user_id]['password']:
