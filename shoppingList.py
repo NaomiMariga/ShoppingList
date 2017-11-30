@@ -91,8 +91,8 @@ class ShoppingList:
         try:
             if self.user.logged_in(token, user_id):
                 if item_name is not None and item_name.strip() is not "":
-                    if quantity.isdigit():
-                        if cost.isdigit():
+                    if quantity.isdigit() or any(char is "." for char in quantity):
+                        if cost.isdigit() or any(char is "." for char in cost):
                             self.user.users[int(user_id)]["list_items"][int(list_id)].append({
                                 "item_name": item_name, "quantity": quantity, "units": units, "cost": cost
                             })
@@ -148,13 +148,13 @@ class ShoppingList:
                             success = False
                             message = "list name cannot be empty"
                     elif attribute == "quantity":
-                        if value.isdigit():
+                        if value.isdigit() or any(char is "." for char in value):
                             self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["quantity"] = value
                         else:
                             success = False
                             message = "quantity must be a digit"
                     elif attribute == "cost":
-                        if value.isdigit():
+                        if value.isdigit() or any(char is "." for char in value):
                             self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["cost"] = value
                         else:
                             success = False

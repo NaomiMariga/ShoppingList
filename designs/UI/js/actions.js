@@ -220,6 +220,10 @@ function add_item() {
                 units.value = "";
             }else{
                 Alert(response.message, items_Alerts, true);
+                name.value = "";
+                quantity.value = "";
+                cost.value = "";
+                units.value = "";
             }
 
         }
