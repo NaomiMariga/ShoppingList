@@ -26,6 +26,7 @@ class User:
                                     self.user_emails.append(email)
                                     success = True
                                     message = "User added successfully"
+                                    status = http_status.codes["Ok"]
                                 else:
                                     message = "Password cannot contain spaces"
                             else:
@@ -100,7 +101,7 @@ class User:
     def forgot_password(self, email):
         success = False
         try:
-            if validate_email(email):
+            if re.match("[^@]+@[^@]+\.[^@]+", email):
                 if email in self.user_emails:
                     user_id = self.user_emails.index(email)
                     username = self.users[user_id]["username"]
