@@ -173,7 +173,7 @@ function read_lists() {
                     let a = document.createElement("a");
                     a.setAttribute("onclick", "read_items("+list.list_id+",\""+list.list_name+"\")");
                     a.className = "list-group-item flex-column";
-                    a.setAttribute("href","#"+list.list_name);
+                    a.setAttribute("href","#");
                     let div = document.createElement("div");
                     div.className = "d-sm-flex w-100 justify-content-between";
                     let h6 = document.createElement("h6");
@@ -229,6 +229,22 @@ function add_item() {
         }
     })
 
+}
+function init() {
+    let user_id = window.sessionStorage.getItem("user_id");
+    let user_name = window.sessionStorage.getItem("username");
+    let token = window.sessionStorage.getItem("token");
+    let user_session = document.querySelector('#user_session');
+    if (user_id===null || token===null || user_id===undefined || token===undefined){
+        logout();
+    }else{
+        read_lists();
+        user_session.value = "Logged in as " + user_name;
+        login_page.classList.add('d-none');
+        if(main_page.classList.contains('d-none')){
+            main_page.classList.remove('d-none');
+        }
+    }
 }
 
 function update_item(item_id, attribute, value) {
@@ -361,9 +377,9 @@ function edit_lists() {
         url: "edit_lists",
         type:"PUT",
         data:{
+            list_id:current_list_id,
             user_id:window.sessionStorage.getItem("user_id"),
             token: window.sessionStorage.getItem("token"),
-            list_id:current_list_id,
             list_name:text_rename_list.value
         },
         success: function (response) {
