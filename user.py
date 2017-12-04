@@ -2,34 +2,37 @@
 class user methods
 """
 import random
-from validate_email import validate_email
+import re
 
 
 class User:
     users = []
     user_emails = []
-    token = None
-    username = None
     users_tokens = []
-    out = None
 
     def registration(self, email, username: str, password: str):
         success = False
         try:
-            if validate_email(email):
+            if re.match("[^@]+@[^@]+\.[^@]+", email):
                 if email not in self.user_emails:
                     if (username.isalnum() or username.isalpha()) and len(username) >= 5:
-                        if len(password) >= 6 and password.isalnum():
-                            self.users.append({
-                                "email": email, "username": username, "password": password,
-                                "lists": [], "list_items": []
-                            })
-                            self.user_emails.append(email)
-                            success = True
-                            message = "User added successfully"
+                        if len(password) >= 6:
+                            if any(letter.isdigit() for letter in password) and any(letter.isalpha() for letter in password):
+                                if password == password.replace(" ", ""):
+                                    self.users.append({
+                                        "email": email, "username": username, "password": password,
+                                        "lists": [], "list_items": []
+                                    })
+                                    self.user_emails.append(email)
+                                    success = True
+                                    message = "User added successfully"
+                                    status = http_status.codes["Ok"]
+                                else:
+                                    message = "Password cannot contain spaces"
+                            else:
+                                message = " Password must contain both numbers and letters"
                         else:
-                            message = "password must be at least 6 characters and" \
-                                      " must contain both numbers and letters"
+                            message = "password must be at least 6 characters"
                     else:
                         message = "username should only be alphanumeric and must be at least 5 characters long"
                 else:
@@ -46,7 +49,7 @@ class User:
     def login(self, email, password):
         success = False
         try:
-            if validate_email(email):
+            if re.match("[^@]+@[^@]+\.[^@]+", email):
                 if email in self.user_emails:
                     user_id = self.user_emails.index(email)
                     if password == self.users[user_id]['password']:
@@ -57,7 +60,7 @@ class User:
                         message = {
                             "message": "Login successful, Welcome " + username,
                             "user_id": user_id,
-                            "user_name": username,
+                            "username": username,
                             "token": token
                         }
                     else:
@@ -98,7 +101,7 @@ class User:
     def forgot_password(self, email):
         success = False
         try:
-            if validate_email(email):
+            if re.match("[^@]+@[^@]+\.[^@]+", email):
                 if email in self.user_emails:
                     user_id = self.user_emails.index(email)
                     username = self.users[user_id]["username"]

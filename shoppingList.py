@@ -13,7 +13,7 @@ class ShoppingList:
         success = False
         try:
             if self.user.logged_in(token, user_id):
-                if list_name is not None:
+                if list_name is not None and list_name.strip() is not "":
                     self.user.users[int(user_id)]["lists"].append(str(list_name))
                     self.user.users[int(user_id)]["list_items"].append([])
                     success = True
@@ -91,11 +91,17 @@ class ShoppingList:
         try:
             if self.user.logged_in(token, user_id):
                 if item_name is not None and item_name.strip() is not "":
-                    self.user.users[int(user_id)]["list_items"][int(list_id)].append({
-                        "item_name": item_name, "quantity": quantity, "units": units, "cost": cost
-                    })
-                    success = True
-                    message = "items added successfully"
+                    if quantity.isdigit() or any(char is "." for char in quantity):
+                        if cost.isdigit() or any(char is "." for char in cost):
+                            self.user.users[int(user_id)]["list_items"][int(list_id)].append({
+                                "item_name": item_name, "quantity": quantity, "units": units, "cost": cost
+                            })
+                            success = True
+                            message = "items added successfully"
+                        else:
+                            message = "cost can only be a digit"
+                    else:
+                        message = "quantity can only contain digits"
                 else:
                     message = "provide the list name"
             else:
@@ -142,9 +148,17 @@ class ShoppingList:
                             success = False
                             message = "list name cannot be empty"
                     elif attribute == "quantity":
-                        self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["quantity"] = value
+                        if value.isdigit() or any(char is "." for char in value):
+                            self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["quantity"] = value
+                        else:
+                            success = False
+                            message = "quantity must be a digit"
                     elif attribute == "cost":
-                        self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["cost"] = value
+                        if value.isdigit() or any(char is "." for char in value):
+                            self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["cost"] = value
+                        else:
+                            success = False
+                            message = "cost must be a digit"
                     elif attribute == "units":
                         self.user.users[int(user_id)]["list_items"][int(list_id)][int(item_id)]["units"] = value
                     else:

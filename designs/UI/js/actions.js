@@ -1,5 +1,6 @@
 let current_list_name = undefined;
 let current_list_id = undefined;
+let items_Alerts = document.querySelector('#items_Alerts');
 
 $('#signupForm').on('shown.bs.collapse', function () {
   // do something…
@@ -25,6 +26,7 @@ let main_page = document.querySelector('#mainPage');
 function login() {
     let email = document.querySelector("#login_email");
     let password = document.querySelector("#login_password");
+    let user_session = document.querySelector('#user_session');
     $.ajax({
         url: "login",
         type: "POST",
@@ -42,11 +44,15 @@ function login() {
                 window.sessionStorage.setItem("user_id", response.message.user_id);
                 window.sessionStorage.setItem("username", response.message.username);
 
+                user_session.value = "Logged in as " + response.message.username;
+
+
                 read_lists();
                 login_page.classList.add('d-none');
                 if(main_page.classList.contains('d-none')){
                     main_page.classList.remove('d-none');
                 }
+
 
             }else{
                 password.value = "";
@@ -157,7 +163,6 @@ function read_lists() {
                     <div class="d-sm-flex w-100 justify-content-between">
                         <h6 class="mb-1">Back to School</h6>
                         <span class="small text-muted"></span>
-
                  */
                 let lists = response.message;
                 while(my_lists.hasChildNodes()){
@@ -168,7 +173,7 @@ function read_lists() {
                     let a = document.createElement("a");
                     a.setAttribute("onclick", "read_items("+list.list_id+",\""+list.list_name+"\")");
                     a.className = "list-group-item flex-column";
-                    a.setAttribute("href","#"+list.list_name);
+                    a.setAttribute("href","#");
                     let div = document.createElement("div");
                     div.className = "d-sm-flex w-100 justify-content-between";
                     let h6 = document.createElement("h6");
@@ -214,12 +219,32 @@ function add_item() {
                 cost.value = "";
                 units.value = "";
             }else{
-                alert(response.message);
+                Alert(response.message, items_Alerts, true);
+                name.value = "";
+                quantity.value = "";
+                cost.value = "";
+                units.value = "";
             }
 
         }
     })
 
+}
+function init() {
+    let user_id = window.sessionStorage.getItem("user_id");
+    let user_name = window.sessionStorage.getItem("username");
+    let token = window.sessionStorage.getItem("token");
+    let user_session = document.querySelector('#user_session');
+    if (user_id===null || token===null || user_id===undefined || token===undefined){
+        logout();
+    }else{
+        read_lists();
+        user_session.value = "Logged in as " + user_name;
+        login_page.classList.add('d-none');
+        if(main_page.classList.contains('d-none')){
+            main_page.classList.remove('d-none');
+        }
+    }
 }
 
 function update_item(item_id, attribute, value) {
@@ -236,8 +261,9 @@ function update_item(item_id, attribute, value) {
         },
         success: function (response) {
             if(!response.success){
-                alert(response.message);
+                Alert(response.message, items_Alerts, true);
             }
+            read_items(current_list_id, current_list_name);
         }
     })
 
@@ -294,7 +320,7 @@ function read_items(list_id, list_name) {
                 input_3.type = "text";
                 input_3.className = "form-control form-control-sm float-right units";
                 input_3.setAttribute("list", "units");
-                input_3.setAttribute("placeholder", "");
+                input_3.setAttribute("placeholder", "units");
                 input_3.value = item.units;
                 input_3.setAttribute("onchange","update_item("+item.item_id+", 'units', this.value)");
                 td2.appendChild(input_3);
@@ -308,6 +334,10 @@ function read_items(list_id, list_name) {
                 input_4.setAttribute("onchange","update_item("+item.item_id+", 'cost', this.value)");
                 td3.appendChild(input_4);
                 let td4 = document.createElement("td");
+                let input_6 = document.createElement("span");
+                let total = item.cost *item.quantity;
+                input_6.appendChild(new Text(""+total));
+                td4.appendChild(input_6).disabled = true;
                 let td5 = document.createElement("td");
                 let a = document.createElement("a");
                 a.className ="material material-minus-circle-outline text-danger";
@@ -347,9 +377,9 @@ function edit_lists() {
         url: "edit_lists",
         type:"PUT",
         data:{
+            list_id:current_list_id,
             user_id:window.sessionStorage.getItem("user_id"),
             token: window.sessionStorage.getItem("token"),
-            list_id:current_list_id,
             list_name:text_rename_list.value
         },
         success: function (response) {
@@ -446,36 +476,41 @@ function logout(){
 }
 
 let signup = function () {
+    let element = document.querySelector("#signup_alerts");
     let email = document.querySelector("#registration_email");
     let username = document.querySelector("#username");
     let password = document.querySelector("#registration_password");
-    $.ajax({
-        url: "register",
-        type: "POST",
-        data: {
-            email: email.value,
-            username: username.value,
-            password: password.value
-        },
-        dataType:"json",
-        success: function (response) {
-            let element = document.querySelector("#signup_alerts");
-            if(response.success){
-                Alert(response.message, element, false);
-                email.value = "";
-                username.value = "";
-                password.value= "";
-                $('#loginForm').collapse("show");
-            }else{
-                Alert(response.message, element, true);
+    let confirm_password = document.querySelector("#confirm_password");
+    if (confirm_password.value === password.value){
+        $.ajax({
+            url: "register",
+            type: "POST",
+            data: {
+                email: email.value,
+                username: username.value,
+                password: password.value
+            },
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    Alert(response.message, element, false);
+                    email.value = "";
+                    username.value = "";
+                    password.value = "";
+                    $('#loginForm').collapse("show");
+                } else {
+                    Alert(response.message, element, true);
+                }
+            },
+            error: function (error) {
+                Alert("An error occurred", element, false);
+                console.log(error);
             }
-        },
-        error: function (error) {
-          Alert("An error occurred", element, false);
-          console.log(error);
-        }
 
-    });
+        });
+    } else {
+        Alert("Passwords do not match", element, true);
+    }
 };
 
 function menu(current, show){
@@ -524,4 +559,3 @@ function Alert(message, element, error)
         element.removeChild(div);
     }, 6000);
 }
-

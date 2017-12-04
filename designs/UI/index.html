@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="init()">
 
 <!-- Start your project here-->
 <div class="container-100" id="loginPage">
@@ -41,7 +41,7 @@
                     <div id="login_alerts"></div>
                     <div class="form-group">
                         <input type="email" class="form-control" id="login_email" placeholder="Email" required>
-                        <span class="form-text small text-muted">Enter your registered email here</span>
+                        <span class="form-text small text-muted ">Enter your registered email here</span>
                     </div>
                     <div>
                         <input type="password" class="form-control" id="login_password" placeholder="Password" required>
@@ -69,12 +69,17 @@
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" placeholder="Username" required>
-                        <span class="form-text small text-muted">You will be identified by this name</span>
+                        <span class="form-text small text-muted alert alert-warning">Hint: username is at least 5 characters long and only contains letters and numbers </span>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="registration_password" placeholder="Password"
                                required>
-                        <span class="form-text small text-muted">A new password for your account</span>
+                        <span class="form-text small text-muted alert alert-warning">Hint: password contains mixed numbers and letters, and is 6 characters long</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Password"
+                               required>
+                        <span class="form-text small text-muted">Confirm for your account</span>
                     </div>
                     <button type="submit" class="btn btn-sm btn-lime float-right">SignUp</button>
 
@@ -86,7 +91,7 @@
 <!-- /Start your project here-->
 
 <!-- Navbar here -->
-<div class="d-none table text-center" id="mainPage">
+<div class="d-none table text-center" id="mainPage" >
     <div class="navbar navbar-toggleable-sm">
         <a class="navbar-brand text-lime material material-shopping-cart" href="#">Shopping List</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#mynav"
@@ -105,6 +110,7 @@
                     <a class="nav-link text-lime" href="#">LOGOUT</a>
                 </li>
             </ul>
+            <p><input type="text" id="user_session" readonly></p>
         </div>
 
     </div>
@@ -113,10 +119,10 @@
         <!-- Shopping Lists -->
         <div class="col-12 col-sm-4 col-md-3 list-group-flush">
             <h5 class="list-group-item-heading">My Lists
-                <a href="#" data-toggle="modal" data-target="#new_list"
-                   title="New List" class="material material-shopping-cart-plus float-right text-lime"
+                <button><a href="#" data-toggle="modal" data-target="#new_list"
+                   title="New List" class=" btn  btn-lg float-right text-lime"
                    style="margin-right: 10px;"
-                ></a>
+                > <span class="text-lime"> Add New Shopping List</span></a></button>
             </h5>
             <div id="myLists">
                 <a href="#" class="list-group-item flex-column">
@@ -164,7 +170,7 @@
                     <td>Remove</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="small muted">The items are automatically updated when you type</td>
+                    <td colspan="5" class="small muted">The items are automatically updated when you type<div id="items_Alerts"></div></td>
                 </tr>
                 </thead>
                 <tbody id="list_items">
@@ -176,7 +182,7 @@
                             <input type="text" id="new_item_quantity" class="form-control form-control-sm float-left quantity"
                                    placeholder="Quantity">
                             <input type="text" id="new_item_units" class="form-control form-control-sm float-right units" list="units"
-                                   placeholder="">
+                                   placeholder="units">
                         </td>
                         <td><input type="text" id="new_item_cost" class="form-control" placeholder="Cost" title="Cost per item"></td>
                         <td colspan="2"><a href="#" onclick="add_item()" class="btn btn-outline-success btn-sm text-lime" title="New Item">Add</a></td>

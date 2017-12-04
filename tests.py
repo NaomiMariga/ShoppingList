@@ -56,7 +56,7 @@ class Tests(unittest.TestCase):
         self.assertTrue(result3["success"], "Login supposed to be successful")
         self.__class__.token = result3["message"]["token"]
         self.__class__.user_id = result3["message"]["user_id"]
-        self.__class__.user_name = result3["message"]["user_name"]
+        self.__class__.user_name = result3["message"]["username"]
 
     def test_05_if_provided_token_and_user_id_are_working(self):
         result1 = self.user.logged_in("token", "user_id")
