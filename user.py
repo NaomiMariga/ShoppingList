@@ -26,7 +26,7 @@ class User:
                                     self.user_emails.append(email)
                                     success = True
                                     message = "User added successfully"
-                                    status = http_status.codes["Ok"]
+                                    
                                 else:
                                     message = "Password cannot contain spaces"
                             else:
